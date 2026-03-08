@@ -21,7 +21,7 @@ let
 
   logDir =
     if isDarwin then "${config.home.homeDirectory}/Library/Logs"
-    else "${config.home.homeDirectory}/.local/share/koyomi/logs";
+    else "${config.home.homeDirectory}/.local/share/kodate/logs";
 
   # -- YAML config generation --------------------------------------------------
   settingsAttr = let
@@ -53,7 +53,7 @@ let
     // optionalAttrs (calendars != []) { inherit calendars; }
     // cfg.extraSettings;
 
-  yamlConfig = pkgs.writeText "koyomi.yaml"
+  yamlConfig = pkgs.writeText "kodate.yaml"
     (lib.generators.toYAML { } settingsAttr);
 in
 {
@@ -62,8 +62,8 @@ in
 
     package = mkOption {
       type = types.package;
-      default = pkgs.koyomi;
-      description = "The koyomi package to use.";
+      default = pkgs.kodate;
+      description = "The kodate package to use.";
     };
 
     # -- Appearance ------------------------------------------------------------
@@ -178,7 +178,7 @@ in
         type = types.bool;
         default = false;
         description = ''
-          Run koyomi as a persistent daemon (launchd on macOS, systemd on Linux).
+          Run kodate as a persistent daemon (launchd on macOS, systemd on Linux).
           The daemon syncs calendars in the background and serves events locally.
         '';
       };
@@ -191,7 +191,7 @@ in
 
       database_url = mkOption {
         type = types.str;
-        default = "sqlite:///tmp/koyomi/state.db";
+        default = "sqlite:///tmp/kodate/state.db";
         description = "Database URL for event storage (sqlite:// or postgres://).";
       };
     };
@@ -216,22 +216,22 @@ in
 
     # Create log directory
     {
-      home.activation.koyomi-log-dir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      home.activation.kodate-log-dir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         run mkdir -p "${logDir}"
       '';
     }
 
     # YAML configuration -- always generated from typed options
     {
-      xdg.configFile."koyomi/koyomi.yaml".source = yamlConfig;
+      xdg.configFile."kodate/kodate.yaml".source = yamlConfig;
     }
 
     # Darwin: launchd agent (daemon mode)
     (mkIf (cfg.daemon.enable && isDarwin)
       (mkLaunchdService {
-        name = "koyomi";
-        label = "io.pleme.koyomi";
-        command = "${cfg.package}/bin/koyomi";
+        name = "kodate";
+        label = "io.pleme.kodate";
+        command = "${cfg.package}/bin/kodate";
         args = [ "daemon" ];
         logDir = logDir;
         processType = "Interactive";
@@ -242,9 +242,9 @@ in
     # Linux: systemd user service (daemon mode)
     (mkIf (cfg.daemon.enable && !isDarwin)
       (mkSystemdService {
-        name = "koyomi";
-        description = "Koyomi — calendar daemon";
-        command = "${cfg.package}/bin/koyomi";
+        name = "kodate";
+        description = "Kodate — calendar daemon";
+        command = "${cfg.package}/bin/kodate";
         args = [ "daemon" ];
       })
     )

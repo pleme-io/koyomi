@@ -21,7 +21,7 @@
     (import "${substrate}/lib/rust-tool-release-flake.nix" {
       inherit nixpkgs crate2nix flake-utils;
     }) {
-      toolName = "koyomi";
+      toolName = "kodate";
       src = self;
       repo = "pleme-io/koyomi";
     }

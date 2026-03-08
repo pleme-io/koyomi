@@ -7,7 +7,7 @@ use tracing_subscriber::EnvFilter;
 use crate::config::KoyomiConfig;
 
 #[derive(Parser)]
-#[command(name = "koyomi", about = "Koyomi (暦) — calendar app")]
+#[command(name = "kodate", about = "Koyomi (暦) — calendar app")]
 struct Cli {
     #[command(subcommand)]
     command: Option<Command>,
@@ -44,18 +44,18 @@ fn main() {
     let cli = Cli::parse();
 
     // Load config via shikumi
-    let config = match shikumi::ConfigDiscovery::new("koyomi")
-        .env_override("KOYOMI_CONFIG")
+    let config = match shikumi::ConfigDiscovery::new("kodate")
+        .env_override("KODATE_CONFIG")
         .discover()
     {
         Ok(path) => {
             tracing::info!("loading config from {}", path.display());
-            let store = shikumi::ConfigStore::<KoyomiConfig>::load(&path, "KOYOMI_")
+            let store = shikumi::ConfigStore::<KoyomiConfig>::load(&path, "KODATE_")
                 .unwrap_or_else(|e| {
                     tracing::warn!("failed to load config: {e}, using defaults");
-                    let tmp = std::env::temp_dir().join("koyomi-default.yaml");
+                    let tmp = std::env::temp_dir().join("kodate-default.yaml");
                     std::fs::write(&tmp, "{}").ok();
-                    shikumi::ConfigStore::load(&tmp, "KOYOMI_").unwrap()
+                    shikumi::ConfigStore::load(&tmp, "KODATE_").unwrap()
                 });
             KoyomiConfig::clone(&store.get())
         }

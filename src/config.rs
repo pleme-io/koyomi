@@ -127,7 +127,7 @@ impl Default for DaemonConfig {
         Self {
             enable: false,
             listen_addr: "0.0.0.0:50052".into(),
-            database_url: "sqlite:///tmp/koyomi/state.db".into(),
+            database_url: "sqlite:///tmp/kodate/state.db".into(),
         }
     }
 }
