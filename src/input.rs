@@ -43,6 +43,8 @@ pub fn default_bindings() -> Vec<KeyBinding> {
         KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::A), action: "add_event".into() },
         KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::E), action: "edit_event".into() },
         KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::D), action: "delete_event".into() },
+        // Search
+        KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::Slash), action: "search".into() },
         // Quit
         KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::Q), action: "quit".into() },
     ]
