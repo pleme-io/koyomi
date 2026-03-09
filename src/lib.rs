@@ -7,3 +7,4 @@ pub mod platform;
 pub mod recurrence;
 pub mod reminder;
 pub mod render;
+pub mod scripting;

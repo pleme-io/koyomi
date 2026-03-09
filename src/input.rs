@@ -2,8 +2,51 @@
 //!
 //! Handles key events and translates them into calendar actions
 //! based on the current mode (Normal, EventEditor, Command).
+//!
+//! Key binding definitions use awase types for platform-agnostic hotkey
+//! representation and serializable binding configuration.
 
+use awase::{Hotkey, Key as AwaseKey, Modifiers as AwaseMods};
 use madori::event::{KeyCode, KeyEvent};
+
+/// A keybinding definition: an awase `Hotkey` paired with an action name.
+#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+pub struct KeyBinding {
+    /// The hotkey that triggers this binding (awase type).
+    pub hotkey: Hotkey,
+    /// The action name to perform.
+    pub action: String,
+}
+
+/// Default keybindings using awase `Hotkey` types.
+#[must_use]
+pub fn default_bindings() -> Vec<KeyBinding> {
+    vec![
+        // Vim navigation
+        KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::J), action: "move_forward".into() },
+        KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::K), action: "move_backward".into() },
+        KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::H), action: "prev_week".into() },
+        KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::L), action: "next_week".into() },
+        // Month navigation
+        KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::N), action: "next_month".into() },
+        KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::P), action: "prev_month".into() },
+        KeyBinding { hotkey: Hotkey::new(AwaseMods::SHIFT, AwaseKey::L), action: "next_month".into() },
+        KeyBinding { hotkey: Hotkey::new(AwaseMods::SHIFT, AwaseKey::H), action: "prev_month".into() },
+        // Jump to today
+        KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::T), action: "jump_today".into() },
+        // View switching
+        KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::V), action: "cycle_view".into() },
+        KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::Num1), action: "month_view".into() },
+        KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::Num2), action: "week_view".into() },
+        KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::Num3), action: "day_view".into() },
+        // Event operations
+        KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::A), action: "add_event".into() },
+        KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::E), action: "edit_event".into() },
+        KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::D), action: "delete_event".into() },
+        // Quit
+        KeyBinding { hotkey: Hotkey::new(AwaseMods::NONE, AwaseKey::Q), action: "quit".into() },
+    ]
+}
 
 /// Application input mode.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -218,6 +261,22 @@ impl EditorField {
 mod tests {
     use super::*;
     use madori::event::Modifiers;
+
+    #[test]
+    fn default_bindings_are_valid() {
+        let bindings = default_bindings();
+        assert!(!bindings.is_empty());
+        let has_quit = bindings.iter().any(|b| b.action == "quit");
+        assert!(has_quit, "should have a quit binding");
+    }
+
+    #[test]
+    fn bindings_are_serializable() {
+        let bindings = default_bindings();
+        let json = serde_json::to_string(&bindings).unwrap();
+        let deserialized: Vec<KeyBinding> = serde_json::from_str(&json).unwrap();
+        assert_eq!(deserialized.len(), bindings.len());
+    }
 
     fn key(code: KeyCode) -> KeyEvent {
         KeyEvent {
