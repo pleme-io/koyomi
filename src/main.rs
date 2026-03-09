@@ -7,6 +7,7 @@ mod calendar;
 mod config;
 mod events;
 mod input;
+mod mcp;
 mod platform;
 mod recurrence;
 mod reminder;
@@ -63,6 +64,8 @@ enum Command {
     List,
     /// Run the background reminder daemon.
     Daemon,
+    /// Start the MCP server (stdio transport).
+    Mcp,
 }
 
 fn main() {
@@ -96,6 +99,7 @@ fn main() {
         Some(Command::Delete { id }) => cmd_delete(&store, &id),
         Some(Command::List) => cmd_list(&store),
         Some(Command::Daemon) => cmd_daemon(&store, &config),
+        Some(Command::Mcp) => cmd_mcp(config),
         None => launch_gui(config, store),
     }
 }
@@ -308,6 +312,16 @@ fn cmd_daemon(store: &EventStore, config: &KoyomiConfig) {
                 Err(e) => tracing::warn!("reminder check failed: {e}"),
             }
             tokio::time::sleep(std::time::Duration::from_secs(60)).await;
+        }
+    });
+}
+
+fn cmd_mcp(config: KoyomiConfig) {
+    let rt = tokio::runtime::Runtime::new().expect("failed to create tokio runtime");
+    rt.block_on(async {
+        if let Err(e) = mcp::run(config).await {
+            tracing::error!("MCP server error: {e}");
+            std::process::exit(1);
         }
     });
 }

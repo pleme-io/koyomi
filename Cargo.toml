@@ -32,6 +32,8 @@ garasu = { path = "../garasu" }
 madori = { path = "../madori" }
 egaku = { path = "../egaku" }
 shikumi = { path = "../shikumi" }
+kaname = { git = "https://github.com/pleme-io/kaname" }
+schemars = "1"
 
 # GPU rendering (needed for direct wgpu types in render code)
 wgpu = "25"
@@ -63,6 +65,9 @@ dirs = "6.0"
 tempfile = "3"
 
 # Unify path deps with git deps used by madori/garasu
+[patch."https://github.com/pleme-io/kaname"]
+kaname = { path = "../kaname" }
+
 [patch."https://github.com/pleme-io/garasu"]
 garasu = { path = "../garasu" }
 
