@@ -11,6 +11,10 @@ license = "MIT"
 categories = ["os::macos-apis"]
 keywords = ["calendar", "caldav", "macos", "scheduling"]
 
+[[bin]]
+name = "koyomi"
+path = "src/main.rs"
+
 [lints.clippy]
 pedantic = { level = "warn", priority = -1 }
 missing_errors_doc = "allow"
@@ -19,18 +23,51 @@ missing_panics_doc = "allow"
 [profile.release]
 codegen-units = 1
 lto = true
+opt-level = "z"
+strip = true
 
 [dependencies]
-shikumi = { git = "ssh://git@github.com/pleme-io/shikumi" }
-sakuin = { git = "ssh://git@github.com/pleme-io/sakuin" }
-kiroku = { git = "ssh://git@github.com/pleme-io/kiroku" }
-arc-swap = "1.8"
+# Pleme-io shared libraries
+garasu = { path = "../garasu" }
+madori = { path = "../madori" }
+egaku = { path = "../egaku" }
+shikumi = { path = "../shikumi" }
+
+# GPU rendering (needed for direct wgpu types in render code)
+wgpu = "25"
+glyphon = "0.9"
+bytemuck = { version = "1", features = ["derive"] }
+
+# CLI and config
 clap = { version = "4", features = ["derive"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+serde_yaml = "0.9"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
-tokio = { version = "1", features = ["full"] }
+thiserror = "2"
+
+# Date/time
 chrono = { version = "0.4", features = ["serde"] }
+
+# Event IDs
+uuid = { version = "1", features = ["v4", "serde"] }
+
+# Async runtime (for daemon mode)
+tokio = { version = "1", features = ["full"] }
+
+# Filesystem
 dirs = "6.0"
-reqwest = { version = "0.12", features = ["json"] }
+
+[dev-dependencies]
+tempfile = "3"
+
+# Unify path deps with git deps used by madori/garasu
+[patch."https://github.com/pleme-io/garasu"]
+garasu = { path = "../garasu" }
+
+[patch."https://github.com/pleme-io/shikumi"]
+shikumi = { path = "../shikumi" }
+
+[patch."https://github.com/pleme-io/egaku"]
+egaku = { path = "../egaku" }

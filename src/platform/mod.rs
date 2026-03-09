@@ -2,6 +2,11 @@
 //!
 //! Each platform or backend provides a `CalendarBackend` implementation
 //! for managing calendar events via CalDAV or native APIs.
+//!
+//! This module is retained for future CalDAV integration but is not
+//! currently used by the GUI — see `events::EventStore` for local storage.
+
+#![allow(dead_code)]
 
 #[cfg(target_os = "macos")]
 pub mod macos;
