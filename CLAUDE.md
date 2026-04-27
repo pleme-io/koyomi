@@ -1,5 +1,8 @@
 # Koyomiban (暦盤) — GPU Calendar
 
+> **★★★ CSE / Knowable Construction.** This repo operates under **Constructive Substrate Engineering** — canonical specification at [`pleme-io/theory/CONSTRUCTIVE-SUBSTRATE-ENGINEERING.md`](https://github.com/pleme-io/theory/blob/main/CONSTRUCTIVE-SUBSTRATE-ENGINEERING.md). The Compounding Directive (operational rules: solve once, load-bearing fixes only, idiom-first, models stay current, direction beats velocity) is in the org-level pleme-io/CLAUDE.md ★★★ section. Read both before non-trivial changes.
+
+
 Crate: `kodate` | Binary: `koyomi` | Config app name: `koyomi`
 
 GPU-rendered calendar with CalDAV sync, natural language event creation, and
