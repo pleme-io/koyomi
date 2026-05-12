@@ -641,6 +641,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "egaku"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4f562ccebd440a454623eb9be04237e991f89063a53dda830806e47aaf64a18a"
+dependencies = [
+ "serde",
+ "thiserror 2.0.18",
+ "tracing",
+ "unicode-segmentation",
+ "unicode-width",
+]
+
+[[package]]
 name = "equivalent"
 version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -867,6 +880,22 @@ dependencies = [
 [[package]]
 name = "garasu"
 version = "0.1.0"
+dependencies = [
+ "glyphon",
+ "pollster",
+ "raw-window-handle",
+ "serde",
+ "thiserror 2.0.18",
+ "tracing",
+ "wgpu",
+ "winit",
+]
+
+[[package]]
+name = "garasu"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "31a29dea2656ac565f05ab9a83a451ded14886b06ad303f745a831f741884ee2"
 dependencies = [
  "glyphon",
  "pollster",
@@ -1140,10 +1169,30 @@ dependencies = [
 ]
 
 [[package]]
+name = "irodori"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0dc14b88cf12196c0f37995676c3cd75c34511436be9c41f7877edb8b1cfcb1e"
+dependencies = [
+ "serde",
+]
+
+[[package]]
 name = "is_terminal_polyfill"
 version = "1.70.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a6cb138bb79a146c1bd460005623e142ef0181e3d0219cb493e02f7d08a35695"
+
+[[package]]
+name = "ishou-tokens"
+version = "0.1.0"
+source = "git+https://github.com/pleme-io/ishou#b5089152df026c1d703f8012360e387fde4ba4c1"
+dependencies = [
+ "irodori",
+ "serde",
+ "serde_json",
+ "wgpu-types",
+]
 
 [[package]]
 name = "itoa"
@@ -1270,16 +1319,17 @@ dependencies = [
  "chrono",
  "clap",
  "dirs",
- "egaku",
- "garasu",
+ "egaku 0.1.0",
+ "garasu 0.1.0",
  "glyphon",
+ "ishou-tokens",
  "kaname",
  "madori",
  "schemars",
  "serde",
  "serde_json",
  "serde_yaml",
- "shikumi",
+ "shikumi 0.1.0",
  "soushi",
  "tempfile",
  "thiserror 2.0.18",
@@ -1399,11 +1449,11 @@ checksum = "234cf4f4a04dc1f57e24b96cc0cd600cf2af460d4161ac5ecdd0af8e1f3b2a38"
 name = "madori"
 version = "0.1.0"
 dependencies = [
- "egaku",
- "garasu",
+ "egaku 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "garasu 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "pollster",
  "serde",
- "shikumi",
+ "shikumi 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "thiserror 2.0.18",
  "tracing",
  "wgpu",
@@ -2505,6 +2555,20 @@ dependencies = [
  "notify",
  "serde",
  "serde_json",
+ "thiserror 2.0.18",
+ "tracing",
+]
+
+[[package]]
+name = "shikumi"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9a069b173b743266d8b24633f4c2178579223fe5483e79a871e4b98c487789a9"
+dependencies = [
+ "arc-swap",
+ "figment",
+ "notify",
+ "serde",
  "thiserror 2.0.18",
  "tracing",
 ]
