@@ -5050,10 +5050,8 @@
       "version": "0.1.0",
       "edition": "2024",
       "source": {
-        "kind": "registry",
-        "url": "https://crates.io/api/v1/crates/garasu/0.1.0/download",
-        "sha256": "31a29dea2656ac565f05ab9a83a451ded14886b06ad303f745a831f741884ee2",
-        "name_with_ext": "garasu-0.1.0.tar.gz"
+        "kind": "path",
+        "relative_path": "."
       },
       "features": [
         "default"
@@ -5063,6 +5061,42 @@
       "binaries": [],
       "lib_target": null,
       "dependencies": [
+        {
+          "name": "bincode",
+          "package_key": "bincode-1.3.3",
+          "kind": "normal",
+          "features": [],
+          "uses_default_features": true,
+          "optional": false,
+          "target": null
+        },
+        {
+          "name": "blake3",
+          "package_key": "blake3-1.8.5",
+          "kind": "normal",
+          "features": [],
+          "uses_default_features": true,
+          "optional": false,
+          "target": null
+        },
+        {
+          "name": "dirs",
+          "package_key": "dirs-6.0.0",
+          "kind": "normal",
+          "features": [],
+          "uses_default_features": true,
+          "optional": false,
+          "target": null
+        },
+        {
+          "name": "fontdb",
+          "package_key": "fontdb-0.16.2",
+          "kind": "normal",
+          "features": [],
+          "uses_default_features": true,
+          "optional": false,
+          "target": null
+        },
         {
           "name": "glyphon",
           "package_key": "glyphon-0.9.0",
@@ -5139,6 +5173,42 @@
         }
       ],
       "runtime_dependencies": [
+        {
+          "name": "bincode",
+          "package_key": "bincode-1.3.3",
+          "kind": "normal",
+          "features": [],
+          "uses_default_features": true,
+          "optional": false,
+          "target": null
+        },
+        {
+          "name": "blake3",
+          "package_key": "blake3-1.8.5",
+          "kind": "normal",
+          "features": [],
+          "uses_default_features": true,
+          "optional": false,
+          "target": null
+        },
+        {
+          "name": "dirs",
+          "package_key": "dirs-6.0.0",
+          "kind": "normal",
+          "features": [],
+          "uses_default_features": true,
+          "optional": false,
+          "target": null
+        },
+        {
+          "name": "fontdb",
+          "package_key": "fontdb-0.16.2",
+          "kind": "normal",
+          "features": [],
+          "uses_default_features": true,
+          "optional": false,
+          "target": null
+        },
         {
           "name": "glyphon",
           "package_key": "glyphon-0.9.0",
@@ -13308,10 +13378,8 @@
       "version": "0.1.0",
       "edition": "2024",
       "source": {
-        "kind": "registry",
-        "url": "https://crates.io/api/v1/crates/shikumi/0.1.0/download",
-        "sha256": "9a069b173b743266d8b24633f4c2178579223fe5483e79a871e4b98c487789a9",
-        "name_with_ext": "shikumi-0.1.0.tar.gz"
+        "kind": "path",
+        "relative_path": "."
       },
       "features": [
         "default"
@@ -13324,6 +13392,15 @@
         {
           "name": "arc_swap",
           "package_key": "arc-swap-1.9.1",
+          "kind": "normal",
+          "features": [],
+          "uses_default_features": true,
+          "optional": false,
+          "target": null
+        },
+        {
+          "name": "async_trait",
+          "package_key": "async-trait-0.1.89",
           "kind": "normal",
           "features": [],
           "uses_default_features": true,
@@ -13359,6 +13436,24 @@
           "features": [
             "derive"
           ],
+          "uses_default_features": true,
+          "optional": false,
+          "target": null
+        },
+        {
+          "name": "serde_json",
+          "package_key": "serde_json-1.0.150",
+          "kind": "normal",
+          "features": [],
+          "uses_default_features": true,
+          "optional": false,
+          "target": null
+        },
+        {
+          "name": "serde_yaml",
+          "package_key": "serde_yaml-0.9.34+deprecated",
+          "kind": "normal",
+          "features": [],
           "uses_default_features": true,
           "optional": false,
           "target": null
@@ -13393,6 +13488,15 @@
           "target": null
         },
         {
+          "name": "async_trait",
+          "package_key": "async-trait-0.1.89",
+          "kind": "normal",
+          "features": [],
+          "uses_default_features": true,
+          "optional": false,
+          "target": null
+        },
+        {
           "name": "figment",
           "package_key": "figment-0.10.19",
           "kind": "normal",
@@ -13426,6 +13530,24 @@
           "target": null
         },
         {
+          "name": "serde_json",
+          "package_key": "serde_json-1.0.150",
+          "kind": "normal",
+          "features": [],
+          "uses_default_features": true,
+          "optional": false,
+          "target": null
+        },
+        {
+          "name": "serde_yaml",
+          "package_key": "serde_yaml-0.9.34+deprecated",
+          "kind": "normal",
+          "features": [],
+          "uses_default_features": true,
+          "optional": false,
+          "target": null
+        },
+        {
           "name": "thiserror",
           "package_key": "thiserror-2.0.18",
           "kind": "normal",
@@ -13450,6 +13572,12 @@
           {
             "version": "1.9.1",
             "rename": "arc_swap"
+          }
+        ],
+        "async-trait": [
+          {
+            "version": "0.1.89",
+            "rename": "async_trait"
           }
         ]
       }
