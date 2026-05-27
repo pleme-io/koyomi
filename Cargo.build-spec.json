@@ -5055,7 +5055,9 @@
         "sha256": "31a29dea2656ac565f05ab9a83a451ded14886b06ad303f745a831f741884ee2",
         "name_with_ext": "garasu-0.1.0.tar.gz"
       },
-      "features": [],
+      "features": [
+        "default"
+      ],
       "proc_macro": false,
       "build_script": null,
       "binaries": [],
@@ -13311,7 +13313,9 @@
         "sha256": "9a069b173b743266d8b24633f4c2178579223fe5483e79a871e4b98c487789a9",
         "name_with_ext": "shikumi-0.1.0.tar.gz"
       },
-      "features": [],
+      "features": [
+        "default"
+      ],
       "proc_macro": false,
       "build_script": null,
       "binaries": [],
